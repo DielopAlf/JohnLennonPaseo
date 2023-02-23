@@ -9,8 +9,8 @@ public class ApagarGargolas : MonoBehaviour
     GameObject[] Enemigos;
     public GameObject malla;
     public float duracion;
-    Material linterna;
-     Vector4 albedo;
+    List<Material> linternas  = new List<Material>();
+    Color albedo;
 
     void Start()
     {
@@ -21,7 +21,6 @@ public class ApagarGargolas : MonoBehaviour
           if(Enemigo.name.Contains("Gargoyle"))
           {
                 Gargolas.Add(Enemigo);
-                Debug.Log("Add");
           }
      }
 
@@ -30,23 +29,31 @@ public class ApagarGargolas : MonoBehaviour
   
     public void DesactivarGargolas()
     {
+        int linterna = 0;
         foreach(GameObject Gargola in Gargolas)
         {
             Gargola.GetComponentInChildren<Observer>().enabled=false;
-            linterna = Gargola.transform.Find("GargoyleModel").gameObject.GetComponent<Renderer>().materials[0];
-            albedo = linterna.color;
-            linterna.color =new Vector4(0f,0f,0f,0f);
+            linternas.Add(Gargola.transform.Find("GargoyleModel").gameObject.GetComponent<Renderer>().materials[0]); 
+            albedo = linternas[linterna].color;
+            linternas[linterna].color =new Vector4(0f,0f,0f,0f);
+            linterna += 1;
         }
 
     }
     public void ActivarGargolas()
     {
+        int linterna = 0;
         foreach(GameObject Gargola in Gargolas)
         {
+
             Gargola.GetComponentInChildren<Observer>().enabled=true;
-            linterna.color=albedo;
+            linternas[linterna].color = albedo;
+            linterna +=1;
         }
-        
+        //si 
+        //si ya que estamos
+        //si
+        //los mas complicados 
     }
      private void OnTriggerEnter(Collider other)
     {

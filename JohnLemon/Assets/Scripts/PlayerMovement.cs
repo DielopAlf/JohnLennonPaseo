@@ -12,8 +12,19 @@ public class PlayerMovement : MonoBehaviour
     Quaternion  m_Rotation = Quaternion.identity;
     private AudioSource m_AudioSource;
 
+
+    // stamina
+    public float duracionstamina = 2f;
+    float staminatimer;
+    [Range(1f,3f)]
+    public float aumentovelocidad=1f;
+    float multiplicadorvelocidad=1f;
+    
+
+
     private void Start()
     {
+        staminatimer=duracionstamina;
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
         m_AudioSource = GetComponent<AudioSource>();
@@ -21,8 +32,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        stamina();
+        float horizontal = Input.GetAxis("Horizontal") * multiplicadorvelocidad;
+        float vertical = Input.GetAxis("Vertical") * multiplicadorvelocidad;
+        Debug.Log(horizontal);
+        Debug.Log(vertical);
+
 
         m_Movement.Set(horizontal,0f,vertical);
         m_Movement.Normalize();
@@ -42,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-
+            
         }
         else
         {
@@ -59,5 +74,23 @@ public class PlayerMovement : MonoBehaviour
         m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude);
         m_Rigidbody.MoveRotation(m_Rotation);
 
+    }
+    public void stamina()
+    {
+        if(Input.GetAxis("sprint")>0f  && staminatimer>0)
+        {
+            staminatimer -= Time.deltaTime;
+            multiplicadorvelocidad = aumentovelocidad;
+        }
+        else
+        { 
+            if (staminatimer<duracionstamina)
+            {
+                staminatimer+= Time.deltaTime*0.5f;
+
+            }
+            multiplicadorvelocidad=1f;
+
+        }
     }
 }
