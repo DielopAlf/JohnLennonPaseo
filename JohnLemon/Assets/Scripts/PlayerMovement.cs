@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public float aumentovelocidad=1f;
     float multiplicadorvelocidad=1f;
     
+    public Slider staminaBar;
 
 
     private void Start()
