@@ -15,12 +15,11 @@ public class Observer : MonoBehaviour
     public bool deteccioninstantanea;
     public float tiempodeteccion;
     float timerdeteccion;
-    public AudioClip watchSource;
+    public AudioSource watchSource;
     bool hasWatchAudioPlayed = false;
-
     [SerializeField] TextMeshProUGUI txtexclamacion;
     [SerializeField] GameObject exclamacion;
-
+    bool iswatchplayer;
     void Start()
     {
         
@@ -79,8 +78,25 @@ public class Observer : MonoBehaviour
             txtexclamacion.text = " ! ";
            exclamacion.SetActive(true);
             Debug.Log("VERTE");
+            if (!hasWatchAudioPlayed && iswatchplayer)
+            {
+
+                watchSource.Play();
+                hasWatchAudioPlayed = true;
+               
+            }
+            Debug.Log("SONAR");
+
+            
         }
+
     }
+   
+        
+            
+
+            
+        
     private void OnTriggerExit(Collider other)
     {
         if(other.transform == player)
