@@ -74,6 +74,8 @@ public class Observer : MonoBehaviour
     {
         if(other.transform == player)
         {
+            watchSource.Play();
+            hasWatchAudioPlayed = true;
             m_IsPlayerInRange = true;
             txtexclamacion.text = " ! ";
            exclamacion.SetActive(true);
@@ -81,8 +83,7 @@ public class Observer : MonoBehaviour
             
             
 
-             watchSource.Play();
-             hasWatchAudioPlayed = true;
+             
                
             
             Debug.Log("SONAR");
