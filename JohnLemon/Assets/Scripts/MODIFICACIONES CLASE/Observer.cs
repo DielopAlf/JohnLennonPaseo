@@ -78,13 +78,13 @@ public class Observer : MonoBehaviour
             txtexclamacion.text = " ! ";
            exclamacion.SetActive(true);
             Debug.Log("VERTE");
-            if (!hasWatchAudioPlayed && iswatchplayer)
-            {
+            
+            
 
-                watchSource.Play();
-                hasWatchAudioPlayed = true;
+             watchSource.Play();
+             hasWatchAudioPlayed = true;
                
-            }
+            
             Debug.Log("SONAR");
 
             
