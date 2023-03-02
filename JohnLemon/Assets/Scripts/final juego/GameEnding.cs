@@ -52,7 +52,7 @@ public class GameEnding : MonoBehaviour
         if (other.gameObject == player)
         {
             isPlayerAtExit = false;
-            NOTASCONTADOR.MyInstance.HideVictoryCondition();
+           // NOTASCONTADOR.MyInstance.HideVictoryCondition();
         }
     }
 
@@ -61,33 +61,34 @@ public class GameEnding : MonoBehaviour
         if (isPlayerAtExit || isPlayerCaught || Timer.IsTimeOver)
         {
             isGameOver = true;
-            NOTES.MyInstance.Finish();
-            if (NOTES.MyInstance.puedesalir)
+          //  NOTES.MyInstance.Finish();
+           // if (NOTES.MyInstance.puedesalir)
             {
-                if (!hasExitAudioPlayed && isPlayerAtExit)
-                {
-                    audioSource.Play();
-                    hasExitAudioPlayed = true;
-                }
-                else if (!hasCaughtAudioPlayed && (isPlayerCaught || Timer.IsTimeOver))
-                {
-                    audioSource.Play();
-                    hasCaughtAudioPlayed = true;
-                }
-                timer += Time.deltaTime;
-                imageCanvasGroup.alpha = timer / fadeDuration;
+               
+            }
+        }
+        if (!hasExitAudioPlayed && isPlayerAtExit)
+        {
+            audioSource.Play();
+            hasExitAudioPlayed = true;
+        }
+        else if (!hasCaughtAudioPlayed && (isPlayerCaught || Timer.IsTimeOver))
+        {
+            audioSource.Play();
+            hasCaughtAudioPlayed = true;
+        }
+        timer += Time.deltaTime;
+        imageCanvasGroup.alpha = timer / fadeDuration;
 
-                if (timer > fadeDuration + displayImageDuration)
-                {
-                    if (doRestart)
-                    {
-                        SceneManager.LoadScene(0);
-                    }
-                    else
-                    {
-                        Application.Quit();
-                    }
-                }
+        if (timer > fadeDuration + displayImageDuration)
+        {
+            if (doRestart)
+            {
+                SceneManager.LoadScene(0);
+            }
+            else
+            {
+                Application.Quit();
             }
         }
     }

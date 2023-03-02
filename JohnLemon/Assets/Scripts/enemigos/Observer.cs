@@ -2,6 +2,9 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+
 
 public class Observer : MonoBehaviour
 {
@@ -12,7 +15,12 @@ public class Observer : MonoBehaviour
     public bool deteccioninstantanea;
     public float tiempodeteccion;
     float timerdeteccion;
-    
+    public AudioClip watchSource;
+    bool hasWatchAudioPlayed = false;
+
+    [SerializeField] TextMeshProUGUI txtexclamacion;
+    [SerializeField] GameObject exclamacion;
+
     void Start()
     {
         
@@ -46,6 +54,7 @@ public class Observer : MonoBehaviour
 
                             gameEnding.CaughtPlayer();
 
+                            Debug.Log("TE PILLE");
 
                         }
                         else
@@ -67,7 +76,9 @@ public class Observer : MonoBehaviour
         if(other.transform == player)
         {
             m_IsPlayerInRange = true;
-
+            txtexclamacion.text = " ! ";
+           exclamacion.SetActive(true);
+            Debug.Log("VERTE");
         }
     }
     private void OnTriggerExit(Collider other)
@@ -77,6 +88,8 @@ public class Observer : MonoBehaviour
 
             m_IsPlayerInRange = false;
             timerdeteccion = 0;
+            txtexclamacion.text = (" ! ");
+            exclamacion.SetActive(false);
 
         }
 
